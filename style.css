@@ -12,6 +12,8 @@
 }
 
 body {
+    margin: 0;
+    padding: 0;
     font-family: 'Open Sans', sans-serif;
     text-align: center;
     font-size: 18px;
@@ -48,4 +50,31 @@ select {
     background-color: #4b6fb3;
 }
 
+#forkme {
+    position: absolute;
+    transform: rotate(45deg) translate(0px, 25px);
+    -webkit-transform: rotate(45deg) translate(0px, 25px);
+    top:    0;
+    right:  0;
+    width:  200px;
+    height: 200px;
+}
 
+#forkme a {
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    padding: 4px 0;
+    background-color: #4b61b3;
+    border: 1px dashed #2b3866;
+    box-shadow: 0px 0px 10px #888;
+}
+#forkme a:hover {
+    background-color: #42569e;
+}
+#forkme a:active {
+    padding: 4px 3px;
+}
