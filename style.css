@@ -18,7 +18,9 @@ body {
     text-align: center;
     font-size: 18px;
 }
-
+p {
+    padding: 0 20px;
+}
 #blabla {
     font-size: 14px;
 }
@@ -71,10 +73,28 @@ select {
     background-color: #4b61b3;
     border: 1px dashed #2b3866;
     box-shadow: 0px 0px 10px #888;
+    overflow: hidden;
 }
 #forkme a:hover {
     background-color: #42569e;
 }
 #forkme a:active {
     padding: 4px 3px;
+}
+
+@media screen and (max-width:800px) {
+    #forkme {
+        position: absolute;
+        transform: none;
+        -webkit-transform: none;
+        top: auto;
+        bottom: -1px;
+        right: 12px;
+        width: auto;
+        height: auto;
+        z-index: -1;
+    }
+    #forkme a, #forkme a:active {
+        padding: 2px 10px;
+    }
 }
