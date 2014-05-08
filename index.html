@@ -15,16 +15,15 @@
     Password generation is done via your browser only, nothing is done using a remote server, and no external provider is used.<br>
     If you don't trust this page (I wouldn't), you can always fork it on GitHub and use it locally.
 </p>
-    <form ng-submit="genpassword()">
+<form ng-submit="genpassword()">
+<input id="plokipass" type="text" ng-model="password" size="{{ passlength }}">
 
-        <input id="plokipass" type="text" ng-model="password" size="{{ passlength }}">
+<div id="options">
+    Generate a <select ng-model="passlength" ng-options="i for i in passlengths" ploki-wheel="passlengths"></select>
+    characters password, with <select ng-model="speciallength" ng-options="i for i in speciallengths" ploki-wheel="speciallengths"></select> special characters
+</div>
 
-        <div id="options">
-        Generate a <select ng-model="passlength" ng-options="i for i in passlengths"></select>
-        characters password, with at least <select ng-model="speciallength" ng-options="i for i in speciallengths"></select> special characters
-        </div>
-
-        <input type="submit" value="Another!" id="another">
-    </form>
+<input type="submit" value="Another!" id="another">
+</form>
 </body>
 </html>

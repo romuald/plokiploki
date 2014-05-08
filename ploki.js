@@ -6,9 +6,29 @@ function shuffle(o){ //v1.0
 };
 
 var app = angular.module('plokiploki', []);
+app.directive('plokiWheel', ['$parse', function($parse){
+    return {
+        require: 'ngModel',
+        link: function(scope, element, attr, ngModel) {
+            element.bind('wheel', function(event, delta){
+                var foo = event.deltaY > 0 ? 1 : -1;
+
+                var allowed = scope.$eval(attr.plokiWheel);
+                var value = ngModel.$modelValue + foo;
+                event.preventDefault();
+
+                if (allowed.indexOf(value) != -1)  {
+                    ngModel.$setViewValue(ngModel.$modelValue + foo, event);
+                    scope.$digest()
+                }
+            });
+        }
+    };
+}]);
+
 app.controller('PlokiPlokiCtl', ['$scope', function($scope) {
     var all = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'.split('');
-    var spe = '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~'.split('');
+    var spe = '!"#$%&\'()*+,-./:;<=>?@[]^_`{|}~'.split('');
 
     $scope.passlengths = [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
     $scope.speciallengths = [0, 1, 2, 3, 4, 5];
@@ -31,9 +51,12 @@ app.controller('PlokiPlokiCtl', ['$scope', function($scope) {
         $scope.password = shuffle(pass).join('');
     };
     $scope.genpassword = genpassword;
+    genpassword();
 
     $scope.$watch('passlength', genpassword);
     $scope.$watch('speciallength', genpassword);
+    $scope.updown = function($delta) {
+        console.log($delta);
+    };
 
-    genpassword();
 }]);

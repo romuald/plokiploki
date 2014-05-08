@@ -38,10 +38,14 @@ select {
 #another {
     margin-top: 18px;
     font-size: 28px;
-    border: 1px solid #4164a6;
+    border: 2px solid #4164a6;
     background-color: #4164a6;
     color: #eee;
-    padding: 3px 15px;
+    padding: 3px 15px 3px 15px;
+}
+
+#another:active {
+    background-color: #4b6fb3;
 }
 
 
