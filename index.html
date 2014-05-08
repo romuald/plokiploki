@@ -1,97 +1,11 @@
 <!doctype html>
 <html ng-app="plokiploki">
 <head>
-<meta charset="utf-8"> 
-<title>Ploki poki - random password generator</title>
-<style type="text/css">
-@font-face {
-    font-family: 'Droid Sans Mono';
-    font-style: normal;
-    font-weight: 400;
-    src: local('Droid Sans Mono'), local('DroidSansMono'), url(droidsansmono.ttf) format('truetype');
-}
-@font-face {
-    font-family: 'Open Sans';
-    font-style: normal;
-    font-weight: 400;
-    src: local('Open Sans'), local('OpenSans'), url(opensans.ttf) format('truetype');
-}
-
-body {
-    font-family: 'Open Sans', sans-serif;
-    text-align: center;
-    font-size: 18px;
-}
-
-#blabla {
-    font-size: 14px;
-}
-#plokipass {
-    font-size: 28px;
-    font-family: 'Droid Sans Mono', monospace;
-    margin: 20px 0 20px 0;
-    padding: 0 10px;
-    text-align: center;
-}
-
-select {
-    border: 1px solid #6695ed;
-    color: #4164a6;
-    background: #fff;
-}
-
-#another {
-    margin-top: 18px;
-    font-size: 28px;
-    border: 1px solid #4164a6;
-    background-color: #4164a6;
-    color: #eee;
-    padding: 3px 15px;
-}
-
-</style>
-<script src="./angular.min.js"></script>
-<script>
-//+ Jonas Raoni Soares Silva
-//@ http://jsfromhell.com/array/shuffle [v1.0]
-function shuffle(o){ //v1.0
-    for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
-    return o;
-};
-
-var app = angular.module('plokiploki', []);
-app.controller('PlokiPlokiCtl', ['$scope', function($scope) {
-    var all = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'.split('');
-    var spe = '!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~'.split('');
-
-    $scope.passlengths = [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30];
-    $scope.speciallengths = [0, 1, 2, 3, 4, 5];
-
-    $scope.passlength = 12;
-    $scope.speciallength = 0;
-
-    function genpassword() {
-        var i, idx, pass=[];
-
-        for (i=0; i < $scope.passlength; i++) {
-            idx = (Math.random() * all.length) >>> 0;
-            pass.push(all[idx]);
-        }
-        for (i=$scope.speciallength; i > 0; i--) {
-            idx = (Math.random() * spe.length) >>> 0;
-            pass.push(spe[idx]);
-            pass.shift();
-        }
-        $scope.password = shuffle(pass).join('');
-    };
-    $scope.genpassword = genpassword;
-
-    $scope.$watch('passlength', genpassword);
-    $scope.$watch('speciallength', genpassword);
-
-    genpassword();
-}]);
-</script>
+    <meta charset="utf-8"> 
+    <title>Ploki poki - random password generator</title>
+    <link rel="stylesheet" href="./style.css" type="text/css">
+    <script src="./angular.min.js"></script>
+    <script src="./ploki.js"></script>
 </head>
 <body ng-controller="PlokiPlokiCtl">
 <p id="intro">

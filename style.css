@@ -1,0 +1,47 @@
+@font-face {
+    font-family: 'Droid Sans Mono';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Droid Sans Mono'), local('DroidSansMono'), url(droidsansmono.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Open Sans'), local('OpenSans'), url(opensans.ttf) format('truetype');
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    text-align: center;
+    font-size: 18px;
+}
+
+#blabla {
+    font-size: 14px;
+}
+
+#plokipass {
+    font-size: 28px;
+    font-family: 'Droid Sans Mono', monospace;
+    margin: 20px 0 20px 0;
+    padding: 0 10px;
+    text-align: center;
+}
+
+select {
+    border: 1px solid #6695ed;
+    color: #4164a6;
+    background: #fff;
+}
+
+#another {
+    margin-top: 18px;
+    font-size: 28px;
+    border: 1px solid #4164a6;
+    background-color: #4164a6;
+    color: #eee;
+    padding: 3px 15px;
+}
+
+
