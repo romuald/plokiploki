@@ -19,11 +19,13 @@
 
 body {
     font-family: 'Open Sans', sans-serif;
-}
-form {
     text-align: center;
+    font-size: 18px;
 }
 
+#blabla {
+    font-size: 14px;
+}
 #plokipass {
     font-size: 28px;
     font-family: 'Droid Sans Mono', monospace;
@@ -31,9 +33,7 @@ form {
     padding: 0 10px;
     text-align: center;
 }
-body {
-    font-size: 18px;
-}
+
 select {
     border: 1px solid #6695ed;
     color: #4164a6;
@@ -94,16 +94,20 @@ app.controller('PlokiPlokiCtl', ['$scope', function($scope) {
 </script>
 </head>
 <body ng-controller="PlokiPlokiCtl">
+<p id="intro">
+    Ploki ploki is a client side random password generator (for lazy folks)
+</p>
+<p id="blabla">
+    Password generation is done via your browser only, nothing is done using a remote server, and no external provider is used.<br>
+    If you don't trust this page (I wouldn't), you can always fork it on GitHub and use it locally.
+</p>
     <form ng-submit="genpassword()">
-        <div id="intro">
-        Ploki ploki, client side random password generation for lazy dummies
-        </div>
 
         <input id="plokipass" type="text" ng-model="password" size="{{ passlength }}">
 
         <div id="options">
         Generate a <select ng-model="passlength" ng-options="i for i in passlengths"></select>
-        characters password with at least <select ng-model="speciallength" ng-options="i for i in speciallengths"></select> special characters
+        characters password, with at least <select ng-model="speciallength" ng-options="i for i in speciallengths"></select> special characters
         </div>
 
         <input type="submit" value="Another!" id="another">
