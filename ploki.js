@@ -25,8 +25,10 @@ app.directive('plokiWheel', ['$parse', function($parse){
         }
     };
 }]);
-
-app.controller('PlokiPlokiCtl', ['$scope', function($scope) {
+app.config(function($locationProvider) {
+    $locationProvider.html5Mode(true);
+});
+app.controller('PlokiPlokiCtl', function($scope, $rootScope, $location) {
     var all = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'.split('');
     var spe = '!"#$%&\'()*+,-./:;<=>?@[]^_`{|}~'.split('');
 
@@ -51,8 +53,36 @@ app.controller('PlokiPlokiCtl', ['$scope', function($scope) {
         $scope.password = shuffle(pass).join('');
     };
     $scope.genpassword = genpassword;
+
+    function hashme(hash) {
+        // Retrieve "config" information from hash
+        if (!hash) {
+            return false;
+        }
+
+        var num, match, changed=false;
+
+        match = /l(\d+)/.exec(hash);
+        num = match&& parseInt(match[1], 10);
+        if ( num && $scope.passlengths.indexOf(num) != -1 ) {
+            $scope.passlength = num;
+        }
+
+        match = /s(\d+)/.exec(hash);
+        num = match && parseInt(match[1], 10);
+        if ( num && $scope.speciallengths.indexOf(num) != -1 ) {
+            $scope.speciallength = num;
+        }
+    }
+    $rootScope.$on('$locationChangeStart', function(event, newUrl, oldUrl) {
+        // Thanks
+        // http://stackoverflow.com/questions/3213531/creating-a-new-location-object-in-javascript
+        var a = document.createElement('a');
+        a.href = newUrl;
+        hashme(a.hash);
+    });
     genpassword();
 
     $scope.$watch('passlength', genpassword);
     $scope.$watch('speciallength', genpassword);
-}]);
+});
