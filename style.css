@@ -2,13 +2,13 @@
     font-family: 'Droid Sans Mono';
     font-style: normal;
     font-weight: 400;
-    src: local('Droid Sans Mono'), local('DroidSansMono'), url(droidsansmono.ttf) format('truetype');
+    src: local('Droid Sans Mono'), local('DroidSansMono'), url(./static/droidsansmono.ttf) format('truetype');
 }
 @font-face {
     font-family: 'Open Sans';
     font-style: normal;
     font-weight: 400;
-    src: local('Open Sans'), local('OpenSans'), url(opensans.ttf) format('truetype');
+    src: local('Open Sans'), local('OpenSans'), url(./static/opensans.ttf) format('truetype');
 }
 
 body {
