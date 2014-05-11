@@ -55,8 +55,4 @@ app.controller('PlokiPlokiCtl', ['$scope', function($scope) {
 
     $scope.$watch('passlength', genpassword);
     $scope.$watch('speciallength', genpassword);
-    $scope.updown = function($delta) {
-        console.log($delta);
-    };
-
 }]);
