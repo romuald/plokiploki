@@ -25,9 +25,6 @@ app.directive('plokiWheel', ['$parse', function($parse){
         }
     };
 }]);
-app.config(function($locationProvider) {
-    $locationProvider.html5Mode(true);
-});
 app.controller('PlokiPlokiCtl', function($scope, $rootScope, $location) {
     var all = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'.split('');
     var spe = '!"#$%&\'()*+,-./:;<=>?@[]^_`{|}~'.split('');
