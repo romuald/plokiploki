@@ -8,4 +8,4 @@ This simple page allows you to generate a random password with a specific length
 
 No remote service / server is used, all can be used locally.
 
-You can check out the demo here: http://pw.bit.fr/
+You can check out the demo here: https://pw.bit.fr/
