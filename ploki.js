@@ -112,11 +112,11 @@
 
 		var num, match, changed;
 
-		match = /l(\d+)/.exec(hash);
+		match = /(?:^|[^a-z])l(\d+)/i.exec(hash);
 		num = match && int(match[1])
 		changed = num && setValue(this.$passlength, num);
 
-		match = /s(\d+)/.exec(hash);
+		match = /(?:^|[^a-z])s(\d+)/i.exec(hash);
 		num = match && int(match[1]);
 		if ( num && setValue(this.$spelength, num) ) {
 			changed = true;
