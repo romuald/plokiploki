@@ -26,8 +26,17 @@ p {
 #intro {
     margin-top: 1.4em;
 }
+
 #blabla {
     font-size: 14px;
+}
+
+#blabla a {
+    color: #4b61b3;
+}
+
+#blabla a:hover {
+    text-decoration: none;
 }
 
 #plokipass {
