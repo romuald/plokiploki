@@ -1,4 +1,38 @@
 (function() {
+
+	var LENGTHS = [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30],
+		SPELENGTHS = [0, 1, 2, 3, 4, 5],
+		ALL = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'.split(''),
+		SPE = '!"#$%&\'()*+,-./:;<=>?@[]^_`{|}~'.split('');
+
+	var $passlength, $spelength, $input;
+
+	function initialize(passlength, spelength) {
+		$passlength = document.getElementById('password-length');
+		$spelength = document.getElementById('special-length');
+		$input = document.getElementById('plokipass');
+
+		initSelect($passlength, LENGTHS);
+		initSelect($spelength, SPELENGTHS);
+
+		$passlength.addEventListener('change', onChange);
+		$spelength.addEventListener('change', onChange);
+		$passlength.addEventListener('wheel', wheel);
+		$spelength.addEventListener('wheel', wheel);
+
+		$input.form.addEventListener('submit', onChange);
+		$input.form.style.display = "block";
+
+		window.addEventListener('hashchange', hashChanged);
+
+		setValue($passlength, passlength);
+		setValue($spelength, spelength);
+
+		if ( ! hashChanged() ) {
+			onChange();
+		}
+	}
+
 	//+ Jonas Raoni Soares Silva
 	//@ http://jsfromhell.com/array/shuffle [v1.0]
 	function shuffle(o){ //v1.0
@@ -11,12 +45,13 @@
 	}
 
 	function initSelect(select, arr) {
-		arr.forEach(function(i) {
+		for ( var i=0; i < arr.length; i++) {
+			var n = arr[i];
 			var opt = document.createElement('option');
-			opt.value = i;
-			opt.innerText = i;
+			opt.value = n;
+			opt.innerText = n;
 			select.appendChild(opt);
-		});
+		}
 	}
 
 	function setValue(select, value) {
@@ -29,68 +64,33 @@
 		return true;
 	}
 
-	function Ploki(passlength, spelength) {
-		var lengths = [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
-		var spelengths = [0, 1, 2, 3, 4, 5];
-
-		this.all = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'.split('');
-		this.spe = '!"#$%&\'()*+,-./:;<=>?@[]^_`{|}~'.split('');
-
-		this.$passlength = document.getElementById('password-length');
-		this.$spelength = document.getElementById('special-length');
-		this.$input = document.getElementById('plokipass');
-
-		initSelect(this.$passlength, lengths);
-		initSelect(this.$spelength, spelengths);
-
-		this.onChange = onChange.bind(this);
-
-		this.$passlength.addEventListener('change', this.onChange);
-		this.$spelength.addEventListener('change', this.onChange);
-		this.$passlength.addEventListener('wheel', wheel.bind(this.$passlength, this));
-		this.$spelength.addEventListener('wheel', wheel.bind(this.$spelength, this));
-
-		this.$input.form.addEventListener('submit', this.onChange);
-		this.$input.form.style.display = "block";
-
-		window.addEventListener('hashchange', hashChanged.bind(this));
-
-		setValue(this.$passlength, passlength);
-		setValue(this.$spelength, spelength);
-
-		if ( ! hashChanged.bind(this)() ) {
-			this.onChange();
-		}
-	}
-
 	function onChange(event) {
-		// this == ploki
 		if ( event && event.type == "submit" ) {
 			event.preventDefault();	
 		}
 
 		var i = 0,
-			s = this.$spelength.value,
-			l = this.$passlength.value - s,
+			s = $spelength.value,
+			l = $passlength.value - s,
 			idx,
 			pass = [];
 
 		for (i=0; i < l; i++) {
-			idx = (Math.random() * this.all.length) >>> 0;
-			pass.push(this.all[idx]);
+			idx = int(Math.random() * ALL.length);
+			pass.push(ALL[idx]);
 		}
 		for (i=s; i > 0; i--) {
-			idx = (Math.random() * this.spe.length) >>> 0;
-			pass.push(this.spe[idx]);
+			idx = int(Math.random() * SPE.length);
+			pass.push(SPE[idx]);
 		}
 
-		this.$input.value = shuffle(pass).join('');
+		$input.value = shuffle(pass).join('');
 	}
 
-	function wheel(ploki, e) {
+	function wheel(e) {
 		e.preventDefault();
 
-		var value = this.value;
+		var value = int(this.value);
 
 		if ( e.deltaY > 0) {
 			value++;
@@ -101,7 +101,7 @@
 		}
 
 		if ( setValue(this, value) ) {
-			ploki.onChange();
+			onChange();
 		}
 	}
 
@@ -115,20 +115,20 @@
 
 		match = /(?:^|[^a-z])l(\d+)/i.exec(hash);
 		num = match && int(match[1])
-		changed = num && setValue(this.$passlength, num);
+		changed = num && setValue($passlength, num);
 
 		match = /(?:^|[^a-z])s(\d+)/i.exec(hash);
 		num = match && int(match[1]);
-		if ( num && setValue(this.$spelength, num) ) {
+		if ( num && setValue($spelength, num) ) {
 			changed = true;
 		}
 
 		if ( changed ) {
-			this.onChange();
+			onChange();
 			return true;
 		}
 		return false
 	}
 
-	var ploki = new Ploki(12, 0);
+	initialize(12, 0);
 })();
