@@ -2,8 +2,8 @@
 	//+ Jonas Raoni Soares Silva
 	//@ http://jsfromhell.com/array/shuffle [v1.0]
 	function shuffle(o){ //v1.0
-	    for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
-	    return o;
+		for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+		return o;
 	};
 
 	function int(i) {
@@ -74,16 +74,16 @@
 			idx,
 			pass = [];
 
-	    for (i=0; i < l; i++) {
-	        idx = (Math.random() * this.all.length) >>> 0;
-	        pass.push(this.all[idx]);
-	    }
-	    for (i=s; i > 0; i--) {
-	        idx = (Math.random() * this.spe.length) >>> 0;
-	        pass.push(this.spe[idx]);
-	    }
+		for (i=0; i < l; i++) {
+			idx = (Math.random() * this.all.length) >>> 0;
+			pass.push(this.all[idx]);
+		}
+		for (i=s; i > 0; i--) {
+			idx = (Math.random() * this.spe.length) >>> 0;
+			pass.push(this.spe[idx]);
+		}
 
-	    this.$input.value = shuffle(pass).join('');
+		this.$input.value = shuffle(pass).join('');
 	}
 
 	function wheel(ploki, e) {
@@ -107,26 +107,26 @@
 	function hashChanged() {
 		var hash = window.location.hash;
 		if (!hash) {
-	        return false;
-	    }
+			return false;
+		}
 
-	    var num, match, changed;
+		var num, match, changed;
 
-	    match = /l(\d+)/.exec(hash);
-	    num = match && int(match[1])
-	    changed = num && setValue(this.$passlength, num);
+		match = /l(\d+)/.exec(hash);
+		num = match && int(match[1])
+		changed = num && setValue(this.$passlength, num);
 
-	    match = /s(\d+)/.exec(hash);
-	    num = match && int(match[1]);
-	    if ( num && setValue(this.$spelength, num) ) {
-	        changed = true;
-	    }
+		match = /s(\d+)/.exec(hash);
+		num = match && int(match[1]);
+		if ( num && setValue(this.$spelength, num) ) {
+			changed = true;
+		}
 
-	    if ( changed ) {
-	    	this.onChange();
-	    	return true;
-	    }
-	    return false
+		if ( changed ) {
+			this.onChange();
+			return true;
+		}
+		return false
 	}
 
 	var ploki = new Ploki(12, 0);
