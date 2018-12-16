@@ -54,8 +54,8 @@
 
 		window.addEventListener('hashchange', hashChanged.bind(this));
 
-		this.$passlength.value = passlength;
-		this.$spelength.value = spelength;
+		setValue(this.$passlength, passlength);
+		setValue(this.$spelength, spelength);
 
 		if ( ! hashChanged.bind(this)() ) {
 			this.onChange();
