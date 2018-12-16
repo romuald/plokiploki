@@ -36,9 +36,9 @@
 		this.all = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'.split('');
 		this.spe = '!"#$%&\'()*+,-./:;<=>?@[]^_`{|}~'.split('');
 
-		this.$passlength = document.querySelector('#password-length');
-		this.$spelength = document.querySelector('#special-length');
-		this.$input = document.querySelector('#plokipass');
+		this.$passlength = document.getElementById('password-length');
+		this.$spelength = document.getElementById('special-length');
+		this.$input = document.getElementById('plokipass');
 
 		initSelect(this.$passlength, lengths);
 		initSelect(this.$spelength, spelengths);
@@ -50,19 +50,16 @@
 		this.$passlength.addEventListener('wheel', wheel.bind(this.$passlength, this));
 		this.$spelength.addEventListener('wheel', wheel.bind(this.$spelength, this));
 
-		document.querySelector('form').addEventListener('submit', this.onChange);
+		this.$input.form.addEventListener('submit', this.onChange);
 
 		window.addEventListener('hashchange', hashChanged.bind(this));
 
 		this.$passlength.value = passlength;
 		this.$spelength.value = spelength;
 
-		if ( window.location.hash ) {
-			hashChanged.bind(this)();
-		} else {
+		if ( ! hashChanged.bind(this)() ) {
 			this.onChange();
 		}
-		
 	}
 
 	function onChange(event) {
@@ -127,7 +124,9 @@
 
 	    if ( changed ) {
 	    	this.onChange();
+	    	return true;
 	    }
+	    return false
 	}
 
 	var ploki = new Ploki(12, 0);
