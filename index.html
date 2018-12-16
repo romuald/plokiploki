@@ -15,7 +15,7 @@
     Password generation is done via your browser only, nothing is done using a remote server, and no external provider is used.<br>
     If you don't trust this page (I wouldn't), you can always fork it on GitHub and use it locally.
 </p>
-<form>
+<form style="display: none">
     <input id="plokipass" type="text">
 
     <div id="options">
@@ -25,6 +25,12 @@
 
     <input type="submit" value="Another!" id="another">
 </form>
+
+<noscript>
+    <p id="noscript">
+    This generator only works with Javascript, but it is not currently enabled in your browser.
+    </p>
+</noscript>
 <script async src="./ploki.js"></script>
 </body>
 </html>

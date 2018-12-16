@@ -51,6 +51,7 @@
 		this.$spelength.addEventListener('wheel', wheel.bind(this.$spelength, this));
 
 		this.$input.form.addEventListener('submit', this.onChange);
+		this.$input.form.style.display = "block";
 
 		window.addEventListener('hashchange', hashChanged.bind(this));
 

@@ -119,3 +119,12 @@ select {
         -moz-box-shadow: none;
     }
 }
+
+#noscript {
+    font-size: 24px;
+    font-weight: bold;
+    padding: 20px;
+    margin-top: 30px;
+    border: 1px solid #333;
+    background-color: #f2db74;
+}
