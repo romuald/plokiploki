@@ -45,6 +45,9 @@ p {
     margin: 20px 0 20px 0;
     padding: 0 10px;
     text-align: center;
+    max-width: 90%;
+    max-width: calc(100vw - 20px);
+    box-sizing: border-box;
 }
 
 select {
@@ -131,6 +134,10 @@ select {
         -webkit-box-shadow: none;
         -moz-box-shadow: none;
     }
+}
+
+#options span {
+    display: inline-block;
 }
 
 #noscript {
