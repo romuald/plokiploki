@@ -1,16 +1,18 @@
 (function() {
+	"use strict";
 
 	var LENGTHS = [6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30],
 		SPELENGTHS = [0, 1, 2, 3, 4, 5],
 		ALL = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'.split(''),
 		SPE = '!"#$%&\'()*+,-./:;<=>?@[]^_`{|}~'.split('');
 
-	var $passlength, $spelength, $input;
+	var $passlength, $spelength, $input, $copy;
 
 	function initialize(passlength, spelength) {
 		$passlength = document.getElementById('password-length');
 		$spelength = document.getElementById('special-length');
 		$input = document.getElementById('plokipass');
+		$copy = document.getElementById('copy');
 
 		initSelect($passlength, LENGTHS);
 		initSelect($spelength, SPELENGTHS);
@@ -23,6 +25,9 @@
 		$input.form.addEventListener('submit', onChange);
 		$input.form.style.display = "block";
 
+		$copy.firstChild.addEventListener('click', copyPass);
+		copyShow()
+
 		window.addEventListener('hashchange', hashChanged);
 
 		setValue($passlength, passlength);
@@ -31,6 +36,25 @@
 		if ( ! hashChanged() ) {
 			onChange();
 		}
+	}
+
+	function copyPass(e) {
+		e.preventDefault();
+
+		var el = document.createElement('textarea');
+		el.value = $input.value;
+		document.body.appendChild(el);
+		el.select();
+		document.execCommand('copy');
+		document.body.removeChild(el);
+
+		$copy.firstChild.style.display = 'none';
+		$copy.lastChild.style.display = '';
+	}
+
+	function copyShow() {
+		$copy.firstChild.style.display = '';
+		$copy.lastChild.style.display = 'none';
 	}
 
 	//+ Jonas Raoni Soares Silva
@@ -85,6 +109,7 @@
 		}
 
 		$input.value = shuffle(pass).join('');
+		copyShow();
 	}
 
 	function wheel(e) {
