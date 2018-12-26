@@ -88,6 +88,22 @@
 		return true;
 	}
 
+	function choice(arr) {
+		var m = arr.length;
+		if ( window.crypto === undefined ) {
+			return arr[int(Math.random() * m)]
+		}
+
+		var max = 256 - (256 % m)
+		var random = new Uint8Array([max]);
+		while ( random >= max ) {
+			window.crypto.getRandomValues(random);
+		}
+
+		return arr[random % m]
+
+	}
+
 	function onChange(event) {
 		if ( event && event.type == "submit" ) {
 			event.preventDefault();	
@@ -100,12 +116,10 @@
 			pass = [];
 
 		for (i=0; i < l; i++) {
-			idx = int(Math.random() * ALL.length);
-			pass.push(ALL[idx]);
+			pass.push(choice(ALL));
 		}
 		for (i=s; i > 0; i--) {
-			idx = int(Math.random() * SPE.length);
-			pass.push(SPE[idx]);
+			pass.push(choice(SPE));
 		}
 
 		$input.value = shuffle(pass).join('');
